@@ -1,8 +1,8 @@
 <h1 align="center">Pranjal Prajapati</h1>
 
 <p align="center">
-  <strong>Data Engineer · Data Platforms · Reliable Pipelines</strong><br/>
-  Building data systems around correctness, observability, reproducibility, and scale.
+  <strong>Data Engineer · Data Platforms · Distributed Systems</strong><br/>
+  Building production-grade data systems for reliability, scale, and real-world impact.
 </p>
 
 <p align="center">
