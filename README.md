@@ -2,7 +2,7 @@
 
 <p align="center">
   <strong>Data Engineer · Data Platforms · Distributed Systems</strong><br/>
-  Building production-grade data systems for reliability, scale, and real-world impact.
+  Designing production-grade data systems for reliability, scale, and real-world impact.
 </p>
 
 <p align="center">
@@ -17,11 +17,13 @@
 
 ## Engineering Profile
 
-I am a software engineer focused on **data engineering and data-intensive systems**. I build end-to-end pipelines from ingestion and transformation through data quality, analytical modeling, orchestration, and delivery.
+I build data platforms for the moment something goes wrong: a source that re-sends yesterday's records, a schema that drifts overnight, a job that dies halfway through a rebuild. Pipelines earn trust in those moments, not on the happy path, so I design for them first.
 
-My current work emphasizes the engineering concerns that make data platforms dependable in practice: **incremental processing, idempotency, schema discipline, data quality gates, lineage, observability, transactional safety, and operational recovery**.
+In practice, that means watermarked incremental ingestion with an overlap window for late source corrections, and idempotent merges keyed on source IDs so any run can be replayed safely. Silver and Gold layers rebuild transactionally and roll back on failure, and reconciliation gates stop a bad load before a consumer ever sees it. Every row traces back through run-level lineage to the batch that produced it, and every run leaves metrics and failure history behind. My Chicago pipeline applies all of this to 1.57M+ records on a daily schedule. My Databricks lakehouse carries the same discipline into multi-entity consolidation with Delta Lake, SCD-oriented dimensions, and incremental MERGE.
 
-I am currently deepening my skills in **distributed systems, Apache Spark, cloud data platforms, system design, and DSA**, with the goal of building increasingly large-scale and production-oriented data systems.
+What I care about most is judgment about the data itself. Real sources are inconsistent in ways no schema declares: records that look duplicated but are legitimate, sentinel values posing as coordinates, timestamps that are artifacts of the source. I profile before I clean, trace anomalies to a root cause, and encode every decision as an executable check, so data quality is a property of the system rather than something I verify by eye.
+
+I'm deepening my work in distributed systems, Apache Spark, cloud data platforms, and system design, aiming at platforms that hold up in operation, not just in a demo.
 
 ## Selected Data Engineering Work
 
