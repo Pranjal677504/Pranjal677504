@@ -2,7 +2,7 @@
 
 <p align="center">
   <strong>Data Engineer · Lakehouse Platforms · Reliable Data Systems</strong><br/>
-  I build data platforms that are correct, recoverable, and observable.
+  I engineer data platforms that are reliable, resilient, and built for scale.
 </p>
 
 <p align="center">
