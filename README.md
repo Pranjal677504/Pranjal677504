@@ -1,8 +1,8 @@
 <h1 align="center">Pranjal Prajapati</h1>
 
 <p align="center">
-  <strong>Data Engineer · Data Platforms · Distributed Systems</strong><br/>
-  Designing production-grade data systems for reliability, scale, and real-world impact.
+  <strong>Data Engineer · Lakehouse Platforms · Reliable Data Systems</strong><br/>
+  I build data platforms that are correct, recoverable, and observable.
 </p>
 
 <p align="center">
@@ -15,48 +15,81 @@
 
 ---
 
-## Engineering Profile
+## About
 
-I build data platforms for the moment something goes wrong: a source that re-sends yesterday's records, a schema that drifts overnight, a job that dies halfway through a rebuild. Pipelines earn trust in those moments, not on the happy path, so I design for them first.
+I build data platforms for the moments when things go wrong: when a source republishes records, a schema drifts unexpectedly, or a pipeline fails midway through a rebuild. Reliable systems earn trust in those situations, so I design for correctness, recovery, and observability from the start.
 
-In practice, that means watermarked incremental ingestion with an overlap window for late source corrections, and idempotent merges keyed on source IDs so any run can be replayed safely. Silver and Gold layers rebuild transactionally and roll back on failure, and reconciliation gates stop a bad load before a consumer ever sees it. Every row traces back through run-level lineage to the batch that produced it, and every run leaves metrics and failure history behind. My Chicago pipeline applies all of this to 1.57M+ records on a daily schedule. My Databricks lakehouse carries the same discipline into multi-entity consolidation with Delta Lake, SCD-oriented dimensions, and incremental MERGE.
+That means watermarked incremental ingestion, overlap windows for late corrections, idempotent merges, transactional Silver and Gold layers, reconciliation gates, and run-level lineage. My Chicago pipeline applies these principles to more than 1.57 million records on a daily schedule, while my Databricks lakehouse extends them to multi-entity consolidation using Delta Lake, incremental `MERGE`, and SCD-oriented dimensions.
 
-What I care about most is judgment about the data itself. Real sources are inconsistent in ways no schema declares: records that look duplicated but are legitimate, sentinel values posing as coordinates, timestamps that are artifacts of the source. I profile before I clean, trace anomalies to a root cause, and encode every decision as an executable check, so data quality is a property of the system rather than something I verify by eye.
+What matters most to me is understanding the data itself. Real-world sources contain legitimate duplicates, misleading sentinel values, inconsistent timestamps, and undocumented anomalies. I profile before I clean, investigate root causes, and encode important assumptions as executable checks so that data quality becomes a property of the system rather than a manual process.
 
-I'm deepening my work in distributed systems, Apache Spark, cloud data platforms, and system design, aiming at platforms that hold up in operation, not just in a demo.
+I’m continuing to deepen my expertise in distributed systems, Apache Spark, cloud data platforms, and system design, with the goal of building data infrastructure that remains reliable in production—not just impressive in a demo.
 
-## Selected Data Engineering Work
+## Domain Map
+
+```text
+Pranjal Prajapati
+│
+├── Data Engineering
+│   ├── Data Ingestion       incremental loads · watermarks · APIs · batch pipelines · late-arriving data
+│   ├── Data Modeling        Medallion architecture · dimensional modeling · star schemas · SCDs
+│   ├── Reliability          idempotency · deduplication · reconciliation · transactional processing
+│   ├── Data Platforms       Databricks · PySpark · Delta Lake · DuckDB · MotherDuck · AWS S3
+│   └── Data Operations      quality gates · lineage · observability · orchestration · CI/CD
+│
+├── Machine Learning
+│   ├── ML Pipelines         preprocessing · feature engineering · training workflows · reproducible experiments
+│   ├── Model Development    supervised learning · model selection · validation · evaluation
+│   └── Data for ML          dataset construction · leakage prevention · feature quality · experiment-ready data
+│
+├── Applied AI
+│   ├── AI Systems           LLM-enabled workflows · retrieval · structured outputs · evaluation
+│   └── AI Data Layer        dataset quality · provenance · lineage · evaluation datasets · feedback loops
+│
+├── Agentic AI
+│   ├── Agent Systems        tool-using agents · multi-step workflows · MCP integrations · scoped execution
+│   ├── Agent Safety         permission boundaries · branch isolation · controlled tool access
+│   └── Evaluation           benchmarks · adversarial testing · red-teaming · merge and deployment gates
+│
+└── Systems Engineering
+    ├── System Design        distributed systems · service boundaries · fault tolerance · consistency
+    ├── Data Architecture    scalable data platforms · storage/compute design · batch & streaming architecture
+    └── Problem Solving      DSA · complexity analysis · performance · scalability trade-offs
+```
+
+*`hands-on`: shipped and running in my repos · `building` / `deepening`: active work, not yet shipped · `exploring`: next direction.*
+
+---
+
+## Selected Work
 
 ### [Chicago Crime Data Pipeline](https://github.com/Pranjal677504/chicago_crimes_data_pipeline)
 
 [![Daily Pipeline](https://github.com/Pranjal677504/chicago_crimes_data_pipeline/actions/workflows/daily_pipeline.yml/badge.svg)](https://github.com/Pranjal677504/chicago_crimes_data_pipeline/actions/workflows/daily_pipeline.yml)
 
-Production-style analytical pipeline processing **1.57M+ records** from the Chicago Data Portal.
+A production-style analytical pipeline over **1.57M+ records** from the Chicago Data Portal, running daily without intervention.
 
-- Incremental API ingestion using watermarks and an overlap window for late source corrections
-- Idempotent merge design with source-ID deduplication
-- Bronze → Silver → Gold modeling in DuckDB / MotherDuck
-- Transactional Silver and Gold rebuilds with rollback on failure
-- Automated reconciliation and data-quality gates
-- Run IDs, batch lineage, row metrics, watermarks, and failure history
-- Daily GitHub Actions orchestration and gated dashboard deployment
+- **Incremental ingestion:** watermarks plus an overlap window, so late source corrections are picked up
+- **Idempotent merges:** source-ID deduplication makes every re-run safe
+- **Medallion modeling:** Bronze → Silver → Gold in DuckDB / MotherDuck
+- **Transactional rebuilds:** Silver and Gold roll back on failure, so consumers never see half-built tables
+- **Trust layer:** reconciliation between layers and data-quality gates that block bad data from shipping
+- **Observability:** run IDs, batch lineage, row metrics, watermarks, and failure history
+- **Delivery:** daily GitHub Actions orchestration with a gated dashboard deployment
 
 **Stack:** Python · SQL · DuckDB · MotherDuck · GitHub Actions · GitHub Pages
-
 **Live analytics:** [pranjal677504.github.io/chicago_crimes_data_pipeline](https://pranjal677504.github.io/chicago_crimes_data_pipeline/)
 
 ---
 
 ### [FMCG Databricks Lakehouse Pipeline](https://github.com/Pranjal677504/fmcg-databricks-lakehouse-pipeline)
 
-Enterprise-style lakehouse consolidation project for integrating parent and subsidiary data into a governed analytical platform.
+An enterprise-style lakehouse that consolidates parent and subsidiary company data into one governed analytical platform.
 
-- Medallion Architecture across Bronze, Silver, and Gold layers
-- Databricks + PySpark processing on Delta Lake
-- AWS S3 landing-zone integration
+- Medallion architecture on **Databricks + PySpark + Delta Lake**, with an AWS S3 landing zone
 - Schema standardization, deduplication, master-data conformance, and integrity checks
-- SCD-oriented dimension processing and incremental `MERGE` patterns
-- Star-schema / analytical Gold modeling
+- SCD-oriented dimension handling and incremental `MERGE` patterns
+- Star-schema Gold layer for analytics
 - Unity Catalog-oriented namespace and governance design
 - Workflow dependency modeling for orchestrated execution
 
@@ -64,29 +97,17 @@ Enterprise-style lakehouse consolidation project for integrating parent and subs
 
 ---
 
-### [Pizza Sales SQL Analytics](https://github.com/Pranjal677504/Pizza-Sales-Analysis)
+## Engineering Judgment
 
-Relational SQL project focused on schema design, multi-table joins, analytical queries, and business-facing metrics.
+Profiling the initial ~1.55M-row load of the Chicago pipeline surfaced the problems that never appear in tutorials. Here is how I handled them, and why.
 
-- Multi-table relational modeling and joins
-- Aggregations and time-based analysis
-- Subqueries and derived tables
-- Window functions and partitioned ranking
-- Revenue, product, and operational analytics
-
-**Stack:** SQL · MySQL
-
-## Data Engineering Focus
-
-| Area | What I work on |
-| --- | --- |
-| **Ingestion** | Batch and API ingestion, incremental loads, watermarks, late-arriving updates |
-| **Transformation** | SQL/Python transformations, Medallion Architecture, reusable processing layers |
-| **Modeling** | Bronze/Silver/Gold, dimensional modeling, fact & dimension design, analytical tables |
-| **Reliability** | Idempotency, deduplication, reconciliation, quality gates, rollback-safe processing |
-| **Operations** | Scheduling, run metadata, logging, lineage, failure handling, recovery procedures |
-| **Platforms** | DuckDB, MotherDuck, Databricks, Spark, Delta Lake, AWS-oriented lakehouse workflows |
-| **Delivery** | Curated analytics datasets, semantic layers, dashboards, documented operational interfaces |
+| What I found | What I did | Why |
+| --- | --- | --- |
+| `case_number` repeats across records; 40 groups (82 rows, ~0.005%) matched on every business field and differed only by ID | Kept every row | `id` is the true primary key and `case_number` is a legitimate one-to-many grouping key. Nothing in the source marks these as errors, so deduplicating would be a guess |
+| Two rows with zeroed coordinates and an identical out-of-city lat/long | Traced both to a single geocode failure and nulled their coordinates by explicit ID | An ID-scoped fix can't accidentally null legitimate future edge cases, which a boundary rule could |
+| ~22,440 rows (~1.4%) with no geospatial data | Left as `NULL`, neither imputed nor dropped | Missing is a fact about the source. Only provably invalid values, such as sentinel zeros, get corrected |
+| Timestamps landing at exactly midnight | Added a `time_is_estimated` flag | A source artifact is labeled, so downstream analysis can exclude it instead of trusting it |
+| `CRIM SEXUAL ASSAULT` and `CRIMINAL SEXUAL ASSAULT` coexisting | Normalized in Silver | Category drift would otherwise split trends in the Gold marts |
 
 ## Technology
 
@@ -105,23 +126,21 @@ Relational SQL project focused on schema design, multi-table joins, analytical q
   <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black" />
 </p>
 
-## How I Approach Data Systems
+## How I Think About Data Systems
 
-- **Correctness before convenience:** validate assumptions and reconcile data between layers.
-- **Safe re-runs:** design pipelines to be idempotent and recoverable.
-- **Incremental by default:** avoid unnecessary full reloads when source semantics allow reliable change processing.
-- **Observable operations:** record run state, lineage, watermarks, row counts, and failure context.
-- **Explicit data quality:** turn expectations into executable checks rather than informal assumptions.
-- **Clear boundaries:** separate ingestion, transformation, validation, serving, and operational concerns.
-- **Security-conscious delivery:** keep credentials out of code and minimize unnecessary exposure of raw data.
-- **Documentation as part of engineering:** architecture, data dictionaries, runbooks, and recovery procedures belong with the system.
+- **Correctness before convenience.** Reconcile every layer against the one before it.
+- **Safe to re-run.** If a job can't be replayed, it isn't finished.
+- **Incremental by default.** Full reloads are a fallback, not a design.
+- **Expectations become code.** Quality rules are executable checks, not tribal knowledge.
+- **Observable by design.** Run state, lineage, row counts, and failure context are recorded, not reconstructed after an incident.
+- **Docs ship with the system.** Architecture, data dictionaries, and runbooks live next to the code.
 
-## Current Focus
+## Currently
 
-I am currently prioritizing **data engineering, distributed systems, SQL, Spark, cloud architecture, and DSA** while continuing to build deeper end-to-end systems that are reliable enough to operate, not just demonstrate.
+Deepening **distributed systems, Apache Spark, cloud data platforms, system design, and DSA**, while building data systems reliable enough to operate, not just demonstrate.
 
 ---
 
 <p align="center">
-  <em>Interested in data platforms, reliable pipelines, distributed systems, and engineering problems where correctness matters.</em>
+  <em>Interested in reliable pipelines, lakehouse architecture, and engineering problems where correctness matters.</em>
 </p>
